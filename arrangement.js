@@ -43,9 +43,11 @@ function draw () {
 
   // clear screen
   background(bg_color1);
-  noStroke();
+  
+  // Set stroke color to black
+  stroke(0);
 
-  // draw a 7x4 grid of faces
+  // draw a 7x4 grid of cookies
   let w = canvasWidth / 7;
   let h = canvasHeight / 4;
   for(let i=0; i<4; i++) {
@@ -53,21 +55,24 @@ function draw () {
       let y = h/2 + h*i;
       let x = w/2 + w*j;
 
-      // center face
-      let eye_value = int(random(2,4));
-      let tilt_value = random(-45, 45);
-      let mouth_value = random(3,4);
+      // center cookie
+      let eye_value = int(random(3,6));
+      let mouth_value = random(0.5, 200);
+      let chocolate_value = int(random(3, 8));
 
       push();
       translate(x, y);
-      scale(w/25, h/25);
+      scale(8);
 
-      angryBirdFace(tilt_value, eye_value, mouth_value);
+      strokeWeight(0.2);
+      cookieFace(eye_value, mouth_value, chocolate_value);
+
       pop();
-
     }
   }
 }
+
+
 
 
 function keyTyped() {

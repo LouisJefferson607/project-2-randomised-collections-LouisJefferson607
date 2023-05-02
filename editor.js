@@ -86,28 +86,11 @@ function draw() {
   if (mode == "1") {
     // draw face using values mapped from 3 sliders
     let eye_value = map(s1, 0, 100, 0, 10);
-    let brow_value = map(s2, 0, 100, -10, 10);
-    let beak_value = map(s3, 0, 100, -10, 10);
-    let cheek_value = map(s4, 0, 100, -10, 10);
     let mouth_value = map(s5, 0, 100, 0, 10);
-    let pupil_value = map(s6, 0, 100, 0, 10);
-    let iris_value = map(s7, 0, 100, 0, 10);
-    let head_value = map(s8, 0, 100, -10, 10);
-    let wing_value = map(s9, 0, 100, 0, 10);
-    let tail_value = map(s10, 0, 100, 0, 10);
-    angryBirdFace(
-      eye_value,
-      brow_value,
-      beak_value,
-      cheek_value,
-      mouth_value,
-      pupil_value,
-      iris_value,
-      head_value,
-      wing_value,
-      tail_value
-    );
+    let chocolate_value = map(s10, 0, 100, 0, 10);
+    cookieFace(eye_value, mouth_value, chocolate_value);
   }
+  
 
   if (mode == "2") {
     // let slider value 1 indicate thinness

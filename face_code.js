@@ -18,57 +18,58 @@
  * eye_value is an integer number of eyes: either 0, 1, 2, or 3
  * mouth_value is how open the mouth is and should generally range from 0.5 to 10
  */
-function angryBirdFace(tilt_value, eye_value, mouth_value) {
-  const bg_color3 = [255, 255, 255];
-  const fg_color3 = [227, 22, 29];
-
-  let headSize = 20
-  let eyeSize = 5;
-  let centerX = 0;
-  let Iy = -4
-  let distactBetweenEyes = 5
-  let MouthDrop = 7
+function cookieFace(eye_value, mouth_value, chocolate_value) {
+  fill(255, 200, 100); // cookie color
+  ellipse(0, 0, 10, 10); // cookie outline
   
-  // rotation in degrees
-  angleMode(DEGREES);
-  rotate(tilt_value);
-
- // head
-  noStroke();
-  fill(fg_color3);
-  ellipse(centerX, 0, headSize, headSize);
-
-  // 2 black eyebrows
+  // draw chocolate chips at random positions
+  fill(170, 85, 0); // chocolate color
+  for (let i = 0; i < chocolate_value; i++) {
+    let x = random(-3, 3);
+    let y = random(-3, 3);
+    ellipse(x, y, 1, 1);
+  }
+  
+  // draw eyes
+  fill(255);
+  ellipse(-3, -2, eye_value, eye_value);
+  ellipse(3, -2, eye_value, eye_value);
+  
+  // draw black pupils in the eyes
   fill(0);
-  let eyebrowHeight = 3;
-  let eyebrowWidth = 6;
-  rect(centerX-eyebrowWidth/2, Iy-eyebrowHeight-1, eyebrowWidth, eyebrowHeight);
-  rect(centerX-eyebrowWidth/2, Iy-eyebrowHeight-1, eyebrowWidth, eyebrowHeight).rotate(45);
-
-  // beak
-  fill(255, 204, 0);
-  let beakWidth = 9;
-  let beakHeight = 5;
-  triangle(centerX-beakWidth/2, Iy+MouthDrop-beakHeight, centerX+beakWidth/2, Iy+MouthDrop-beakHeight, centerX, Iy+MouthDrop);
-  rect(centerX-beakWidth/2, Iy+MouthDrop-beakHeight, beakWidth, beakHeight);
-
-  // white eyes
-  fill(bg_color3);
-  ellipse(centerX - distactBetweenEyes, Iy, eyeSize+3);
-  ellipse(centerX + distactBetweenEyes, Iy, eyeSize+3);
-
-  // black pupils
-  fill(0);
-  let pupilSize = 2;
-  ellipse(centerX - distactBetweenEyes, Iy, pupilSize);
-  ellipse(centerX + distactBetweenEyes, Iy, pupilSize);
-
-  // mouth
-  noFill();
-  stroke(0);
-  strokeWeight(1);
-  arc(centerX, Iy + MouthDrop, distactBetweenEyes, mouth_value, 0, PI);
+  let pupil_size = eye_value * 0.5; // size of the pupil
+  let pupil_offset = eye_value * 0.2; // offset of the pupil from the center of the eye
+  ellipse(-3, -2, pupil_size, pupil_size);
+  ellipse(3, -2, pupil_size, pupil_size);
+  
+  // draw two small white circles inside each pupil
+  fill(255);
+  let small_circle1_size = pupil_size * 0.5;
+  let small_circle2_size = pupil_size * 0.3;
+  let small_circle1_offset = pupil_size * 0.2;
+  let small_circle2_offset = pupil_size * 0.1;
+  ellipse(-3 - pupil_offset + small_circle1_offset, -2 - small_circle1_offset, small_circle1_size, small_circle1_size);
+  ellipse(-3 - pupil_offset + small_circle2_offset, -2 + small_circle2_offset, small_circle2_size, small_circle2_size);
+  ellipse(3 + pupil_offset - small_circle1_offset, -2 - small_circle1_offset, small_circle1_size, small_circle1_size);
+  ellipse(3 + pupil_offset - small_circle2_offset, -2 + small_circle2_offset, small_circle2_size, small_circle2_size);
+  
+  // draw mouth
+  fill(255, 100, 100);
+  let mouth_height = map(mouth_value, 0, 100, 0, 2); // map the mouth value to a range of 0-2
+  rect(-1, 2, 2, mouth_height, 1); // draw a rectangle for the mouth
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function simplePurpleFace() {
