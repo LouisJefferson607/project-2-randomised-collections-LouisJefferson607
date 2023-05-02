@@ -19,7 +19,17 @@
  * mouth_value is how open the mouth is and should generally range from 0.5 to 10
  */
 function cookieFace(eye_value, mouth_value, chocolate_value) {
-  fill(255, 200, 100); // cookie color
+  let cookie_colors = [
+    color(132, 86, 60),
+    color(217, 190, 145),
+    color(231, 206, 150),
+    color(238, 224, 177),
+    // color(230, 115, 0),
+    // color(255, 128, 0)
+  ];
+  let random_cookie_color = random(cookie_colors);
+  fill(random_cookie_color);
+    
   ellipse(0, 0, 10, 10); // cookie outline
   //  beginShape();
   // let noiseMax = 0.5; // set maximum noise value to 0.5
@@ -36,7 +46,16 @@ function cookieFace(eye_value, mouth_value, chocolate_value) {
   
   
   // draw chocolate chips at random positions
+  if (random_cookie_color === cookie_colors[0]) {
+    fill(255);
+    for (let i = 0; i < chocolate_value; i++) {
+      let x = random(-3, 3);
+      let y = random(-3, 3);
+      ellipse(x, y, 1, 1);
+    }
+  } else
   fill(170, 85, 0); // chocolate color
+  
   for (let i = 0; i < chocolate_value; i++) {
     let x = random(-3, 3);
     let y = random(-3, 3);
