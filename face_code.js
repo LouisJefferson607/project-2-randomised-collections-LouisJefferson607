@@ -13,9 +13,14 @@
  * eye_value is an integer number of eyes: either 0, 1, 2, or 3
  * mouth_value is how open the mouth is and should generally range from 0.5 to 10
  */
-function orangeAlienFace(tilt_value, eye_value, mouth_value) {
-  const bg_color3 = [71, 222, 219];
-  const fg_color3 = [255, 93, 35];
+/*
+ * tilt_value is in degrees
+ * eye_value is an integer number of eyes: either 0, 1, 2, or 3
+ * mouth_value is how open the mouth is and should generally range from 0.5 to 10
+ */
+function angryBirdFace(tilt_value, eye_value, mouth_value) {
+  const bg_color3 = [255, 255, 255];
+  const fg_color3 = [227, 22, 29];
 
   let headSize = 20
   let eyeSize = 5;
@@ -33,22 +38,36 @@ function orangeAlienFace(tilt_value, eye_value, mouth_value) {
   fill(fg_color3);
   ellipse(centerX, 0, headSize, headSize);
 
-  // 2 traditonal eyes
-  if (eye_value === 1 || eye_value == 3) {
-    fill(bg_color3);
-    ellipse(centerX, Iy, eyeSize-1,eyeSize);
-   
-  }
-// middle eye
-  if (eye_value >= 2) {
-    fill(bg_color3);
-    ellipse(centerX - distactBetweenEyes, Iy, eyeSize);
-    ellipse(centerX + distactBetweenEyes, Iy, eyeSize );
-  }
+  // 2 black eyebrows
+  fill(0);
+  let eyebrowHeight = 3;
+  let eyebrowWidth = 6;
+  rect(centerX-eyebrowWidth/2, Iy-eyebrowHeight-1, eyebrowWidth, eyebrowHeight);
+  rect(centerX-eyebrowWidth/2, Iy-eyebrowHeight-1, eyebrowWidth, eyebrowHeight).rotate(45);
+
+  // beak
+  fill(255, 204, 0);
+  let beakWidth = 9;
+  let beakHeight = 5;
+  triangle(centerX-beakWidth/2, Iy+MouthDrop-beakHeight, centerX+beakWidth/2, Iy+MouthDrop-beakHeight, centerX, Iy+MouthDrop);
+  rect(centerX-beakWidth/2, Iy+MouthDrop-beakHeight, beakWidth, beakHeight);
+
+  // white eyes
+  fill(bg_color3);
+  ellipse(centerX - distactBetweenEyes, Iy, eyeSize+3);
+  ellipse(centerX + distactBetweenEyes, Iy, eyeSize+3);
+
+  // black pupils
+  fill(0);
+  let pupilSize = 2;
+  ellipse(centerX - distactBetweenEyes, Iy, pupilSize);
+  ellipse(centerX + distactBetweenEyes, Iy, pupilSize);
 
   // mouth
-  fill(bg_color3);
-  ellipse(centerX, Iy + MouthDrop, distactBetweenEyes, mouth_value);
+  noFill();
+  stroke(0);
+  strokeWeight(1);
+  arc(centerX, Iy + MouthDrop, distactBetweenEyes, mouth_value, 0, PI);
 }
 
 
