@@ -69,7 +69,7 @@ function draw () {
       scale(8);
 
       strokeWeight(0.2);
-      cookieFace(eye_value, mouth_value, chocolate_value);
+      cookieFace(eye_value, mouth_value, chocolate_value,1);
 
       pop();
     }

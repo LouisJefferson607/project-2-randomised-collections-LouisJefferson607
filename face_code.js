@@ -18,7 +18,37 @@
  * eye_value is an integer number of eyes: either 0, 1, 2, or 3
  * mouth_value is how open the mouth is and should generally range from 0.5 to 10
  */
-function cookieFace(eye_value, mouth_value, chocolate_value) {
+function cookieFace(eye_value, mouth_value, chocolate_value, seedVal) {
+  // let cookie_colors = [
+  //   color(132, 86, 60),
+  //   color(217, 190, 145),
+  //   color(231, 206, 150),
+  //   color(238, 224, 177),
+  //   // color(230, 115, 0),
+  //   // color(255, 128, 0)
+  // ];
+  // let random_cookie_color = random(cookie_colors);
+  // fill(random_cookie_color);
+    
+  // ellipse(0, 0, 10, 10); // cookie outline
+  push()
+randomSeed(seedVal)
+  angleMode(RADIANS)
+   beginShape();
+  let noiseMax = 0.5; // set maximum noise value to 0.5
+  for (let angle = 0; angle <= 360; angle += 10) {
+    let xOff = map(cos(radians(angle)), -1, 1, 0, noiseMax);
+    let yOff = map(sin(radians(angle)), -1, 1, 0, noiseMax);
+    let noiseVal = noise(xOff*2, yOff*2); // multiply xOff and yOff by 2 for a smaller noise size
+    let radius = 5 + (noiseVal * 5); // set radius range to 5-10 for a smaller cookie size
+    let x = radius * cos(radians(angle));
+    let y = radius * sin(radians(angle));
+    curveVertex(x, y);
+  }
+  endShape(CLOSE);
+pop()
+  // Draw chocolate chips at random positions
+  noStroke();
   let cookie_colors = [
     color(132, 86, 60),
     color(217, 190, 145),
@@ -27,42 +57,35 @@ function cookieFace(eye_value, mouth_value, chocolate_value) {
     // color(230, 115, 0),
     // color(255, 128, 0)
   ];
-  let random_cookie_color = random(cookie_colors);
-  fill(random_cookie_color);
-    
-  ellipse(0, 0, 10, 10); // cookie outline
-  //  beginShape();
-  // let noiseMax = 0.5; // set maximum noise value to 0.5
-  // for (let angle = 0; angle <= 360; angle += 10) {
-  //   let xOff = map(cos(radians(angle)), -1, 1, 0, noiseMax);
-  //   let yOff = map(sin(radians(angle)), -1, 1, 0, noiseMax);
-  //   let noiseVal = noise(xOff*2, yOff*2); // multiply xOff and yOff by 2 for a smaller noise size
-  //   let radius = 5 + (noiseVal * 5); // set radius range to 5-10 for a smaller cookie size
-  //   let x = radius * cos(radians(angle));
-  //   let y = radius * sin(radians(angle));
-  //   vertex(x, y);
+  // let random_cookie_color = random(cookie_colors);
+  // fill(random_cookie_color);
+
+  // let gradientSize = 10;
+  // let gradientCenter = createVector(0, 0);
+  // let gradientStartColor = color(255, 255, 255);
+  // let gradientEndColor = random_cookie_color;
+
+  // for (let i = gradientSize; i > 0; i--) {
+  //   let t = map(i, 0, gradientSize, 0, 1);
+  //   let gradientColor = lerpColor(gradientStartColor, gradientEndColor, t);
+  //   fill(gradientColor);
+  //   ellipse(gradientCenter.x, gradientCenter.y, i, i);
+  //}
+  // if (random_cookie_color !== cookie_colors[0]) {
+  //   fill(170, 85, 0); // chocolate color
+  // } else {
+  //   fill(255); // white color for chocolate chips if the cookie is the first color in the array
   // }
-  // endShape(CLOSE);
   
+  // for (let i = 0; i < chocolate_value; i++) {
+  //   let x = random(-3, 3);
+  //   let y = random(-3, 3);
+  //   ellipse(x, y, 1, 1);
+  // }
   
-  // draw chocolate chips at random positions
-  if (random_cookie_color === cookie_colors[0]) {
-    fill(255);
-    for (let i = 0; i < chocolate_value; i++) {
-      let x = random(-3, 3);
-      let y = random(-3, 3);
-      ellipse(x, y, 1, 1);
-    }
-  } else
-  fill(170, 85, 0); // chocolate color
-  
-  for (let i = 0; i < chocolate_value; i++) {
-    let x = random(-3, 3);
-    let y = random(-3, 3);
-    ellipse(x, y, 1, 1);
-  }
   
   // draw eyes
+  stroke(1);
   fill(255);
   ellipse(-3, -2, eye_value, eye_value);
   ellipse(3, -2, eye_value, eye_value);
