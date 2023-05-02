@@ -21,6 +21,19 @@
 function cookieFace(eye_value, mouth_value, chocolate_value) {
   fill(255, 200, 100); // cookie color
   ellipse(0, 0, 10, 10); // cookie outline
+  //  beginShape();
+  // let noiseMax = 0.5; // set maximum noise value to 0.5
+  // for (let angle = 0; angle <= 360; angle += 10) {
+  //   let xOff = map(cos(radians(angle)), -1, 1, 0, noiseMax);
+  //   let yOff = map(sin(radians(angle)), -1, 1, 0, noiseMax);
+  //   let noiseVal = noise(xOff*2, yOff*2); // multiply xOff and yOff by 2 for a smaller noise size
+  //   let radius = 5 + (noiseVal * 5); // set radius range to 5-10 for a smaller cookie size
+  //   let x = radius * cos(radians(angle));
+  //   let y = radius * sin(radians(angle));
+  //   vertex(x, y);
+  // }
+  // endShape(CLOSE);
+  
   
   // draw chocolate chips at random positions
   fill(170, 85, 0); // chocolate color

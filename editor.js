@@ -83,14 +83,14 @@ function draw() {
   scale(face_scale);
 
   push();
-  if (mode == "1") {
-    // draw face using values mapped from 3 sliders
-    let eye_value = map(s1, 0, 100, 0, 10);
-    let mouth_value = map(s5, 0, 100, 0, 10);
-    let chocolate_value = map(s10, 0, 100, 0, 10);
-    cookieFace(eye_value, mouth_value, chocolate_value);
-  }
-  
+ if (mode == "1") {
+  // draw face using values mapped from 3 sliders
+  let eye_value = map(s1, 0, 100, 0, 10);
+  let mouth_value = map(s5, 0, 100, 0, 2);
+  let chocolate_value = map(s10, 0, 100, 0, 10);
+  cookieFace(eye_value, mouth_value, chocolate_value);
+}
+
 
   if (mode == "2") {
     // let slider value 1 indicate thinness
