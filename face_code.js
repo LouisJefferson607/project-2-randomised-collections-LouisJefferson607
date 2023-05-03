@@ -18,24 +18,65 @@
  * eye_value is an integer number of eyes: either 0, 1, 2, or 3
  * mouth_value is how open the mouth is and should generally range from 0.5 to 10
  */
-function cookieFace(eye_value, mouth_value, chocolate_value, seedVal) {
-  // let cookie_colors = [
-  //   color(132, 86, 60),
-  //   color(217, 190, 145),
-  //   color(231, 206, 150),
-  //   color(238, 224, 177),
-  //   // color(230, 115, 0),
-  //   // color(255, 128, 0)
-  // ];
-  // let random_cookie_color = random(cookie_colors);
-  // fill(random_cookie_color);
+function cookieFace(eye_value, mouth_value, chocolate_value, NS, chocolate_size) {
+  let cookie_colors = [
+    {color: color(132, 86, 60), weight: 5},
+    {color: color(217, 190, 145), weight: 3},
+    {color: color(231, 206, 150), weight: 2},
+    {color: color(238, 224, 177), weight: 1},
+    {color: color(37, 32, 27), weight: 0.1, burnt: true},
+    {color: color(255, 255, 255), weight: 0.01, uncooked: true},
+  ];
+
+  // Calculate the total weight of all the colors
+  let total_weight = 0;
+  for (let i = 0; i < cookie_colors.length; i++) {
+    total_weight += cookie_colors[i].weight;
+  }
+
+  // Randomly select a color based on its weight
+  let random_weight = random(0, total_weight);
+  let random_cookie_color;
+  for (let i = 0; i < cookie_colors.length; i++) {
+    random_weight -= cookie_colors[i].weight;
+    if (random_weight <= 0) {
+      random_cookie_color = cookie_colors[i].color;
+      if (cookie_colors[i].uncooked) {
+        fill(255); // uncooked color
+      } else if (cookie_colors[i].burnt) {
+        fill(37, 32, 27); // burnt color
+      } else {
+        fill(random_cookie_color); // normal color
+      }
+      break;
+    }
+  }
     
-  // ellipse(0, 0, 10, 10); // cookie outline
-  push()
-randomSeed(seedVal)
+noiseSeed(NS)
   angleMode(RADIANS)
-   beginShape();
+noStroke()
+  let shadow_offset = 1;
+  let shadow_color = color(0, 0, 0, 50);
+  push();
+  translate(shadow_offset, shadow_offset);
+  fill(shadow_color);
+  beginShape();
   let noiseMax = 0.5; // set maximum noise value to 0.5
+  for (let angle = 0; angle <= 360; angle += 10) {
+    let xOff = map(cos(radians(angle)), -1, 1, 0, noiseMax);
+    let yOff = map(sin(radians(angle)), -1, 1, 0, noiseMax);
+    let noiseVal = noise(xOff * 2, yOff * 2); // multiply xOff and yOff by 2 for a smaller noise size
+    let radius = 5 + (noiseVal * 5); // set radius range to 5-10 for a smaller cookie size
+    let x = radius * cos(radians(angle));
+    let y = radius * sin(radians(angle));
+    curveVertex(x, y);
+  }
+  endShape(CLOSE);
+
+  pop();
+   beginShape();
+   stroke(1);
+  noiseMax = 0.5; // set maximum noise value to 0.5
   for (let angle = 0; angle <= 360; angle += 10) {
     let xOff = map(cos(radians(angle)), -1, 1, 0, noiseMax);
     let yOff = map(sin(radians(angle)), -1, 1, 0, noiseMax);
@@ -46,42 +87,22 @@ randomSeed(seedVal)
     curveVertex(x, y);
   }
   endShape(CLOSE);
-pop()
+
+  
   // Draw chocolate chips at random positions
   noStroke();
-  let cookie_colors = [
-    color(132, 86, 60),
-    color(217, 190, 145),
-    color(231, 206, 150),
-    color(238, 224, 177),
-    // color(230, 115, 0),
-    // color(255, 128, 0)
-  ];
-  // let random_cookie_color = random(cookie_colors);
-  // fill(random_cookie_color);
-
-  // let gradientSize = 10;
-  // let gradientCenter = createVector(0, 0);
-  // let gradientStartColor = color(255, 255, 255);
-  // let gradientEndColor = random_cookie_color;
-
-  // for (let i = gradientSize; i > 0; i--) {
-  //   let t = map(i, 0, gradientSize, 0, 1);
-  //   let gradientColor = lerpColor(gradientStartColor, gradientEndColor, t);
-  //   fill(gradientColor);
-  //   ellipse(gradientCenter.x, gradientCenter.y, i, i);
-  //}
-  // if (random_cookie_color !== cookie_colors[0]) {
-  //   fill(170, 85, 0); // chocolate color
-  // } else {
-  //   fill(255); // white color for chocolate chips if the cookie is the first color in the array
-  // }
+  ;
+  if (random_cookie_color !== cookie_colors[0]) {
+    fill(37 , 32, 27); // chocolate color
+  } else {
+    fill(237 , 230 ,214); // white color for chocolate chips if the cookie is the first color in the array
+  }
   
-  // for (let i = 0; i < chocolate_value; i++) {
-  //   let x = random(-3, 3);
-  //   let y = random(-3, 3);
-  //   ellipse(x, y, 1, 1);
-  // }
+  for (let i = 0; i < chocolate_value; i++) {
+    let x = random(-5, 5);
+    let y = random(-5, 5);
+    ellipse(x, y, chocolate_size, chocolate_size);
+  }
   
   
   // draw eyes
@@ -112,45 +133,4 @@ pop()
   fill(255, 100, 100);
   let mouth_height = map(mouth_value, 0, 100, 0, 2); // map the mouth value to a range of 0-2
   rect(-1, 2, 2, mouth_height, 1); // draw a rectangle for the mouth
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function simplePurpleFace() {
-  fill(234, 122, 244);
-  noStroke();
-  // head
-  ellipse(0, 0, 20);
-  // eyes
-  fill(255, 217, 114);
-  ellipse(-3, -3, 3);
-  ellipse( 3, -3, 3);
-}
-
-/*
- * thinness_value ranges from 0-100 and indicates how thin the face is
- */
-function blockyFace(thinness_value) {
-  // head
-  noStroke();
-  fill(134, 19, 136);
-  let head_width = map(thinness_value, 0, 100, 8, 20);
-  rect(-head_width/2, -9, head_width, 18);
- 
-
-  // eyes
-  fill(234, 122, 244);
-  ellipse(-2, -4, 1);
-  ellipse( 2, -4, 1);
 }

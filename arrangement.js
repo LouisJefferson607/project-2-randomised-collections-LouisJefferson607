@@ -41,41 +41,72 @@ function draw () {
   // reset the random number generator each time draw is called
   randomSeed(curRandomSeed);
 
+  
+
   // clear screen
   background(bg_color1);
+  for (let i = 0; i < canvasWidth; i += 20) {
+    for (let j = 0; j < canvasHeight; j += 20) {
+      if ((i + j) % 40 === 0) {
+        fill(192, 128, 64);
+      } else {
+        fill(192, 128, 64, 120);
+      }
+      rect(i, j, 20, 20);
+    }
+  }
+
   
   // Set stroke color to black
   stroke(0);
+  fill(255, 255, 255);
+  
+// Draw drop shadow
+noStroke();
+fill(0, 0, 0, 100);
+ellipse(canvasWidth/2 + 30, canvasHeight/2 + 30, 700, 500);
 
-  // draw a 7x4 grid of cookies
-  //let w = canvasWidth / 7;
- // let h = canvasHeight / 4;
-  //for(let i=0; i<4; i++) {
-  //  for(let j=0; j<7; j++) {
-   //   let y = h/2 + h*i;
-   //   let x = w/2 + w*j;
+// Draw plate
+noStroke();
+fill(230, 230, 230);
+ellipse(canvasWidth/2, canvasHeight/2, 700, 500);
 
-      // center cookie
-      for (let i =0; i<20; i++) {
+// Draw plate's outer ring
+noFill();
+stroke(200, 200, 200);
+strokeWeight(20);
+ellipse(canvasWidth/2, canvasHeight/2, 720, 520);
 
-      let eye_value = int(random(3,6));
-      let mouth_value = random(0.5, 100);
-      let chocolate_value = int(random(3, 8));
-      let height_cook = int(random(0,500));
-      let width_cook = int(random(0,960));
+// Draw plate's inner ring
+noFill();
+stroke(230, 230, 230);
+strokeWeight(10);
+ellipse(canvasWidth/2, canvasHeight/2, 680, 480);
 
-      push();
-      translate(width_cook, height_cook);
-      scale(8);
 
-      strokeWeight(0.2);
-      cookieFace(eye_value, mouth_value, chocolate_value,1);
 
-      pop();
+      for (let i = 0; i < 50; i++) {
+
+        let eye_value = int(random(3, 8));
+        let mouth_value = random(0, 150);
+        let chocolate_value = int(random(0, 14));
+        let height_cook = int(random(canvasHeight / 2 - 140, canvasHeight / 2 + 140));
+        let width_cook = int(random(canvasWidth /  2 - 250, canvasWidth / 2 + 250));
+        let chocolate_size = int(random(1, 2));
+    
+        push();
+        translate(width_cook, height_cook);
+        scale(8);
+    
+        strokeWeight(0.2);
+        cookieFace(eye_value, mouth_value, chocolate_value, curRandomSeed+i, chocolate_size);
+    
+        pop();
     }
+    
   }
- // }
-//}
+ 
+
 
 
 
