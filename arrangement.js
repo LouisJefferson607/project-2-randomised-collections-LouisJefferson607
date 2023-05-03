@@ -63,7 +63,7 @@ function draw () {
   
 // Draw drop shadow
 noStroke();
-fill(0, 0, 0, 100);
+fill(0, 0, 0, 00);
 ellipse(canvasWidth/2 + 30, canvasHeight/2 + 30, 700, 500);
 
 // Draw plate

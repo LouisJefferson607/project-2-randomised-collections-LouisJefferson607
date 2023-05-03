@@ -21,7 +21,7 @@ function setup () {
   slider2 = createSlider(0, 100, 50);
   slider3 = createSlider(0, 100, 50);
   slider4 = createSlider(0, 100, 50);
-  slider5 = createSlider(0, 100, 50);
+  slider5 = createSlider(0, 2000, 4000);
   slider6 = createSlider(0, 100, 50);
   slider7 = createSlider(0, 100, 50);
   slider8 = createSlider(0, 100, 50);
@@ -86,7 +86,7 @@ function draw() {
  if (mode == "1") {
   // draw face using values mapped from 3 sliders
   let eye_value = map(s1, 0, 100, 0, 10);
-  let mouth_value = map(s5, 0, 100, 0, 2);
+  let mouth_value = map(s5, 0, 100, 0, 10);
   let chocolate_value = map(s10, 0, 100, 0, 10);
   cookieFace(eye_value, mouth_value, chocolate_value);
 }
