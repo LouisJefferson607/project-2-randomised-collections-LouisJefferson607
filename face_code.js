@@ -45,7 +45,8 @@
         break;
       }
     }
-      
+  //Gets random noise seed so that all cookies are drawn differently
+  //Draws cookies shadow using Perlin noise
   noiseSeed(NS)
     angleMode(RADIANS)
   noStroke()
@@ -66,7 +67,7 @@
       curveVertex(x, y);
     }
     endShape(CLOSE);
-
+    //Draws cookies using Perlin noise
     pop();
     beginShape();
     stroke(1);
@@ -83,7 +84,7 @@
     endShape(CLOSE);
 
     
-    // Draw chocolate chips at random positions
+    // If cookie is brown color , choc chip cookies are white. Otherise they are breown
     noStroke();
     ;
     if (random_cookie_color !== cookie_colors[0].color) {
@@ -92,7 +93,7 @@
       fill(237, 230, 214); // white color for chocolate chips if the cookie is the first color in the array
     }
     
-    
+    //Draws choc chips
     for (let i = 0; i < chocolate_value; i++) {
       let x = random(-5, 5);
       let y = random(-5, 5);
@@ -113,7 +114,7 @@
     ellipse(-3, -2, pupil_size, pupil_size);
     ellipse(3, -2, pupil_size, pupil_size);
     
-    // draw two small white circles inside each pupil
+    // draw two small white circles inside each pupil relative to eyes
     fill(255);
     let small_circle1_size = pupil_size * 0.5;
     let small_circle2_size = pupil_size * 0.3;
